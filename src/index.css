@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme colors */
+  --bg-main: #f7f9fb;
+  --bg-secondary: #eef2f6;
+  --bg-surface: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(15, 23, 42, 0.08);
+}
+
+.dark {
+  /* Dark theme colors */
+  --bg-main: #0b0f14;
+  --bg-secondary: #121821;
+  --bg-surface: #181f2b;
+  --text-primary: #e6eaf0;
+  --text-secondary: #b4bcc8;
+  --text-muted: #7d8794;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Utility classes for theme colors */
+.bg-main {
+  background-color: var(--bg-main);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-surface {
+  background-color: var(--bg-surface);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.card-bg {
+  background-color: var(--card-bg);
+}
+
+.card-border {
+  border-color: var(--card-border);
+}
+
+/* Glass morphism effect */
+.glass {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.dark .glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+section {
+  scroll-margin-top: 64px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 50s linear infinite;
+}
+
+.pause-animation {
+  animation-play-state: paused;
+}
