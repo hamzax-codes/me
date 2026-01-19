@@ -10,9 +10,9 @@ import Footer from './components/Footer';
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-main transition-theme">
+      <div className="min-h-screen bg-main transition-theme overflow-x-hidden">
         <Navbar />
-        <main>
+        <main className="overflow-x-hidden">
           <Hero />
           <About />
           <Skills />
