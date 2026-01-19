@@ -28,10 +28,10 @@ const Contact = () => {
         setStatus({ type: '', message: '' });
 
         try {
-            // EmailJS Configuration - Using environment variables for security
-            const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-            const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+            // EmailJS Configuration - With fallbacks for production
+            const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_qqf2tjs';
+            const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_a40wu2i';
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'x5vHsZwCFWbsgcsCi';
 
             // Send email to you
             const now = new Date();
@@ -54,7 +54,7 @@ const Contact = () => {
                     name: formData.name,
                     email: formData.email
                 };
-                await emailjs.send(serviceID, import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, autoReplyParams, publicKey);
+                await emailjs.send(serviceID, import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID || 'template_dx1gc0i', autoReplyParams, publicKey);
             } catch (autoReplyError) {
                 console.log('Auto-reply not sent (template may not exist yet):', autoReplyError);
                 // Continue - main email was sent successfully
