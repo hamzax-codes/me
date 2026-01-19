@@ -67,7 +67,9 @@ const Navbar = () => {
                     <a href="#home" className="flex items-center gap-0 group">
                         <img
                             src={logo}
-                            alt="Logo"
+                            alt="Hamza Portfolio Logo"
+                            width="80"
+                            height="80"
                             className="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
                         />
                         <span className="text-3xl font-bold text-primary -ml-5">
@@ -103,7 +105,7 @@ const Navbar = () => {
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-lg hover:bg-brand-500/10 transition-colors text-primary"
-                            aria-label="Toggle theme"
+                            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                         >
                             {theme === 'dark' ? <HiSun size={24} /> : <HiMoon size={24} />}
                         </button>
@@ -114,7 +116,7 @@ const Navbar = () => {
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-lg hover:bg-brand-500/10 transition-colors text-primary"
-                            aria-label="Toggle theme"
+                            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                         >
                             {theme === 'dark' ? <HiSun size={24} /> : <HiMoon size={24} />}
                         </button>

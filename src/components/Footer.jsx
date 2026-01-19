@@ -41,7 +41,9 @@ const Footer = () => {
                     <a href="#home" className="inline-flex items-center gap-0 group mb-0">
                         <img
                             src={logo}
-                            alt="Logo"
+                            alt="Hamza Portfolio Logo"
+                            width="64"
+                            height="64"
                             className="w-16 h-16 object-contain group-hover:scale-110 transition-transform"
                         />
                         <span className="text-2xl font-bold text-primary -ml-4">

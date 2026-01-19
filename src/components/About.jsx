@@ -21,7 +21,9 @@ const About = () => {
                             <div className="absolute inset-0 bg-brand-500/10 rounded-[2rem] -rotate-6 shadow-lg scale-100 -translate-x-2 -translate-y-2"></div>
                             <img
                                 src={heroPhoto}
-                                alt="About me"
+                                alt="Hamza Ali - Software Engineer"
+                                loading="lazy"
+                                decoding="async"
                                 className="relative z-10 w-full h-[390px] sm:h-[480px] object-cover object-center rounded-[2rem] shadow-2xl border-2 border-brand-500/20"
                             />
                         </div>
