@@ -24,7 +24,7 @@ const About = () => {
                                 alt="Hamza Ali - Software Engineer"
                                 loading="lazy"
                                 decoding="async"
-                                className="relative z-10 w-full h-[390px] sm:h-[480px] object-cover object-center rounded-[2rem] shadow-2xl border-2 border-brand-500/20"
+                                className="relative z-10 w-full h-[390px] sm:h-[480px] object-contain sm:object-cover object-center rounded-[2rem] shadow-2xl border-2 border-brand-500/20"
                             />
                         </div>
                     </motion.div>
