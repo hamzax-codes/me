@@ -156,6 +156,31 @@ const Skills = () => {
         if (slider.scrollLeft <= 0) slider.scrollLeft += halfWidth;
     };
 
+    // Touch event handlers for mobile
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        const touch = e.touches[0];
+        setStartX(touch.pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        const x = touch.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+
+        const slider = scrollRef.current;
+        const halfWidth = slider.scrollWidth / 2;
+        if (slider.scrollLeft >= halfWidth) slider.scrollLeft -= halfWidth;
+        if (slider.scrollLeft <= 0) slider.scrollLeft += halfWidth;
+    };
+
     const skillCategories = [
         {
             title: 'Frontend Development',
@@ -235,12 +260,21 @@ const Skills = () => {
                         setIsPaused(false);
                         handleMouseUp();
                     }}
+                    onTouchEnd={() => {
+                        setIsPaused(false);
+                        handleTouchEnd();
+                    }}
                 >
                     <div
                         ref={scrollRef}
                         className="flex gap-8 overflow-x-hidden select-none"
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
+                        onTouchStart={(e) => {
+                            setIsPaused(true);
+                            handleTouchStart(e);
+                        }}
+                        onTouchMove={handleTouchMove}
                     >
                         {[...services, ...services].map((service, index) => (
                             <div
