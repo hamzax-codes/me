@@ -76,6 +76,9 @@ const Skills = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
+    const [velocity, setVelocity] = useState(0);
+    const lastTimeRef = useRef(0);
+    const lastXRef = useRef(0);
 
     // Auto-scroll logic
     useEffect(() => {
@@ -156,24 +159,61 @@ const Skills = () => {
         if (slider.scrollLeft <= 0) slider.scrollLeft += halfWidth;
     };
 
-    // Touch event handlers for mobile
+    // Touch event handlers for mobile with momentum
     const handleTouchStart = (e) => {
         setIsDragging(true);
+        setVelocity(0);
         const touch = e.touches[0];
-        setStartX(touch.pageX - scrollRef.current.offsetLeft);
+        const x = touch.pageX - scrollRef.current.offsetLeft;
+        setStartX(x);
         setScrollLeft(scrollRef.current.scrollLeft);
+        lastTimeRef.current = Date.now();
+        lastXRef.current = x;
     };
 
     const handleTouchEnd = () => {
         setIsDragging(false);
+        // Apply momentum scrolling
+        if (Math.abs(velocity) > 0.5) {
+            let currentVelocity = velocity;
+            const deceleration = 0.95;
+            const momentumScroll = () => {
+                if (Math.abs(currentVelocity) < 0.1) return;
+                const slider = scrollRef.current;
+                if (!slider) return;
+
+                slider.scrollLeft -= currentVelocity;
+                currentVelocity *= deceleration;
+
+                // Handle infinite wrap
+                const halfWidth = slider.scrollWidth / 2;
+                if (slider.scrollLeft >= halfWidth) slider.scrollLeft -= halfWidth;
+                if (slider.scrollLeft <= 0) slider.scrollLeft += halfWidth;
+
+                requestAnimationFrame(momentumScroll);
+            };
+            requestAnimationFrame(momentumScroll);
+        }
     };
 
     const handleTouchMove = (e) => {
         if (!isDragging) return;
+        e.preventDefault(); // Prevent default touch scrolling
+
         const touch = e.touches[0];
         const x = touch.pageX - scrollRef.current.offsetLeft;
         const walk = (x - startX) * 2;
         scrollRef.current.scrollLeft = scrollLeft - walk;
+
+        // Calculate velocity for momentum
+        const now = Date.now();
+        const timeDelta = now - lastTimeRef.current;
+        if (timeDelta > 0) {
+            const newVelocity = (x - lastXRef.current) / timeDelta * 20;
+            setVelocity(newVelocity);
+        }
+        lastTimeRef.current = now;
+        lastXRef.current = x;
 
         const slider = scrollRef.current;
         const halfWidth = slider.scrollWidth / 2;
@@ -267,7 +307,8 @@ const Skills = () => {
                 >
                     <div
                         ref={scrollRef}
-                        className="flex gap-8 overflow-x-hidden select-none"
+                        className="flex gap-8 overflow-x-hidden select-none touch-pan-x"
+                        style={{ touchAction: 'pan-x' }}
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
                         onTouchStart={(e) => {
@@ -279,7 +320,7 @@ const Skills = () => {
                         {[...services, ...services].map((service, index) => (
                             <div
                                 key={index}
-                                className="glass rounded-xl p-5 flex flex-col items-center text-center group/card hover:border-brand-500/50 transition-all w-[260px] sm:w-[300px] flex-shrink-0 overflow-hidden shadow-lg pointer-events-auto"
+                                className="glass rounded-xl p-5 flex flex-col items-center text-center group/card hover:border-brand-500/50 active:border-brand-500 active:scale-95 transition-all w-[260px] sm:w-[300px] flex-shrink-0 overflow-hidden shadow-lg pointer-events-auto"
                             >
                                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary flex items-center justify-center mb-4 relative">
                                     <div className="absolute inset-0 rounded-full border-2 border-brand-500/20 group-hover/card:border-brand-500 transition-colors" />
