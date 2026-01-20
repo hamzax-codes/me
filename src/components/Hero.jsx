@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { HiArrowRight, HiDownload } from 'react-icons/hi';
+import { HiDownload } from 'react-icons/hi';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -110,7 +110,7 @@ const Hero = () => {
                             className="flex flex-wrap gap-4 justify-center"
                         >
                             <button
-                                onClick={() => window.open('/resume.pdf', '_blank')}
+                                onClick={() => window.open('/MUHAMMAD HAMZA.pdf', '_blank')}
                                 className="px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white rounded-lg font-medium transition-all hover:scale-105 flex items-center gap-2 shadow-lg shadow-brand-500/30"
                             >
                                 Download Resume

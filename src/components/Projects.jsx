@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { HiExternalLink } from 'react-icons/hi';
 import { SiGithub } from 'react-icons/si';
 import { fadeInUp, staggerContainer, staggerItem } from '../utils/animations';
 

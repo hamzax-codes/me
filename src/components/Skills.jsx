@@ -26,9 +26,9 @@ import {
     SiScrapy,
     SiSelenium
 } from 'react-icons/si';
-import { VscCode, VscJson, VscRemote, VscChecklist, VscShield } from 'react-icons/vsc';
+import { VscCode, VscRemote, VscChecklist, VscShield } from 'react-icons/vsc';
 import { BsBootstrapFill } from 'react-icons/bs';
-import { TbApi, TbDatabase, TbSearch, TbAutomation, TbBrowser, TbDeviceDesktop, TbCloudSearch, TbCode } from 'react-icons/tb';
+import { TbApi, TbDatabase, TbAutomation, TbBrowser, TbDeviceDesktop, TbCloudSearch, TbCode } from 'react-icons/tb';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Skills = () => {
